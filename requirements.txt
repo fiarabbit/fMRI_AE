@@ -1,0 +1,6 @@
+awscli>=1.11.150
+nibabel>=2.1.0
+chainer>=3.0.0b1
+numpy>=1.13.1
+PyYAML>=3.12
+requests>=2.18.4
