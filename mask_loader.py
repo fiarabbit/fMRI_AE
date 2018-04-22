@@ -3,8 +3,10 @@ import nibabel as nib
 import warnings
 
 def load_mask(mask_path: str):
-    mask = np.asarray(nib.load(mask_path).get_data(), dtype=np.float32)
+    # mask = np.asarray(nib.load(mask_path).get_data(), dtype=np.float32)
+    mask = np.load(mask_path)
     try:
+        assert mask.dtype == np.float32
         assert (1 == mask[mask.nonzero()]).all()
     except AssertionError:
         warnings.warn("Non-bool mask")

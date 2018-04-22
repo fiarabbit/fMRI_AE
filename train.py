@@ -16,8 +16,8 @@ from importlib import import_module
 
 def main():
     config = get_config()
-    print("configured as follows:")
-    print(yaml_dump(config))
+    # print("configured as follows:")
+    # print(yaml_dump(config))
     while True:
         s = input("ok? (y/n):")
         if s == 'y' or s == 'Y':
@@ -42,7 +42,7 @@ def main():
 
         model_module = import_module(config["model"]["module"])
         Model = getattr(model_module, config["model"]["class"])
-        model = Model(mask=mask, **config["additional information"]["model_params"])
+        model = Model(mask=mask, **config["model"]["params"])
         try:
             chainer.cuda.get_device_from_id(0).use()
             gpu = 0
@@ -64,27 +64,23 @@ def main():
         optimizer = Optimizer(**config["optimizer"]["params"])
 
         optimizer.setup(model)
-        try:
-            optimizer.add_hook(WeightDecay(config["optimizer"]["WeightDecay"]))
-            print("Weight Decay was set to {}".format(config["optimizer"]["WeightDecay"]))
-        except KeyError:
-            print("Weight Decay was not set")
+
+        for hook_config in config["optimizer"]["hook"]:
+            hook_module = import_module(hook_config["module"])
+            Hook = getattr(hook_module, hook_config["class"])
+            hook = Hook(**hook_config["params"])
+            optimizer.add_hook(hook)
+
 
         updater = Updater(train_iterator, optimizer, device=gpu)
 
-        trainer = Trainer(updater, config["trainer"]["stop_trigger"], config["save"]["model"]["directory"])
+        trainer = Trainer(updater, **config["trainer"]["params"])
         trainer.extend(snapshot_object(model, "model_iter_{.updater.iteration}"), trigger=config["trainer"]["model_interval"])
         trainer.extend(observe_lr(), trigger=config["trainer"]["log_interval"])
         trainer.extend(LogReport(["epoch", "iteration", "main/loss", "validation/main/loss", "lr", "elapsed_time"], trigger=config["trainer"]["log_interval"]))
         trainer.extend(Evaluator(valid_iterator, model, device=gpu), trigger=config["trainer"]["eval_interval"])
         trainer.extend(PrintReport(["epoch", "iteration", "main/loss", "validation/main/loss", "lr", "elapsed_time"]), trigger=config["trainer"]["log_interval"])
         trainer.extend(ProgressBar(update_interval=10))
-        try:
-            trainer.extend(ExponentialShift(**config["optimizer"]["ExponentialShift"]["params"]), trigger=config["trainer"]["ExponentialShift"])
-            print("Exponential Shift was set")
-        except KeyError:
-            print("Exponential Shift was not set")
-
         trainer.run()
         log_config(config, "succeeded")
 

@@ -1,164 +1,139 @@
 from util import assert_dir, assert_file, yaml_dump, yaml_dump_log
+from helper.config_helper import get_savedir
 import awsutil
 
 from datetime import datetime
-from os import listdir, path, mkdir
+from os import listdir, path, mkdir, walk, makedirs
 from shutil import copy2, rmtree
 import uuid
 
 
-def get_config(experiment_name=None):
+def get_config():
     config = {
         "general":
             {
                 "name": "",
-                "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
+                "date": datetime.now().strftime("%Y/%m/%d_%H:%M:%S"),
                 "hash": str(uuid.uuid4())[0:8]
             },
-        "dataset":
-            {
-                "directory": {
-                    "train": None,
-                    "valid": None,
-                },
-                "file": {
-                    "train": [],
-                    "valid": [],
-                },
-                "module": "dataset",
-                "class": "NpyCroppedDataset",
-                "train": {
-                    "params": {
-                        "directory": "/data/npy/train",
-                    }
-                },
-                "valid": {
-                    "params": {
-                        "directory": "/data/npy/valid",
-                    }
-                }
-
-            },
-        "model":
-            {
-                "module": "model",
-                "class": "SimpleFCAE_E16D16"
-            },
-        "optimizer": {
-            "class": "MomentumSGD",
-            "params": {
-                "lr": 1,
-                "momentum": 0.9
-            },
-            "WeightDecay": 0.0001,
-            "ExponentialShift": {
+        "device": [0],  # 0, if using GPUs
+        "dataset": {
+            "module": "dataset",  # == dataset.py
+            "class": "NibDataset",
+            "train": {
                 "params": {
-                    "attr": "lr",
-                    "rate": 0.1,
-                }
+                    "directory": "/data/train"
+                },
+                "file": None  # to be automatically configured
+            },
+            "valid": {
+                "params": {
+                    "directory": "/data/valid"
+                },
+                "file": None  # to be automatically configured
             }
         },
+        "model": {
+            "module": "model",  # == model.py
+            "class": "ReorgPixelShufflerFCAE_E64D64",
+            "params": {
+                # "mask" parameter is NOT to be configured in config.py
+                "r": 2,
+                "in_mask": "mask",
+                "out_mask": "mask"
+            }
+        },
+        "optimizer": {
+            "module": "chainer.optimizers",
+            "class": "Adam",
+            "params": {
+            },
+            "hook":
+                [
+                    {
+                        "module": "chainer.optimizer",
+                        "class": "WeightDecay",
+                        "params": {
+                            "rate": 0.0001
+                        }
+                    }
+                ]
+        },
         "trainer": {
-            "stop_trigger": [1000, "epoch"],
+            "params": {
+                "stop_trigger": [1000, "epoch"],
+                "out": None  # to be automaticaly configured
+            },
             "model_interval": [1, "epoch"],
             "log_interval": [100, "iteration"],
-            "eval_interval": [1, "epoch"],
-            "ExponentialShift": [10, "epoch"]
+            "eval_interval": [1, "epoch"]
         },
-        "batch":
-            {
-                "train": 20,
-                "valid": 20,
-                "test": 10
-            },
-        "device": [0, 1, 2, 3, 4, 5, 6, 7],
+        "batch": {
+            "train": 32,
+            "valid": 32
+        },
         "save": {
             "root": "/out",
-            "directory": None,
+            "directory": None,  # to be automatically configured
+            "program": {
+                "directory": None  # to be automatically configured
+            },
             "log": {
-                "directory": None,
+                "directory": None,  # to be automatically configured
                 "file": "config.yml"
             },
             "model": {
-                "directory": None
+                "directory": None  # to be automatically configured
             }
         },
         "additional information":
             {
                 "mask": {
-                    "directory": "/data/mask",
-                    "file": "average_optthr.nii",
-                    "crop": [[9, 81], [11, 99], [0, 80]]
+                    "directory": "/data/npy/mask",
+                    "file": "average_optthr.npy",
                 },
                 "ec2": {
                     "instance-id": awsutil.get_instanceid(),
                     "volume-id": awsutil.get_volumeids()
-                },
-                "model_params": {
-                    "r": 2,
-                    "in_mask": "mask",
-                    "out_mask": "mask",
                 }
             }
     }
-    # assert file existence
-    config["dataset"]["directory"]["train"] = config["dataset"]["train"]["params"]["directory"]
-    config["dataset"]["directory"]["valid"] = config["dataset"]["valid"]["params"]
+
     try:
-        assert_dir(config["dataset"]["directory"]["train"])
-        assert_dir(config["dataset"]["directory"]["valid"])
+        assert_dir(config["dataset"]["train"]["params"]["directory"])
+        assert_dir(config["dataset"]["valid"]["params"]["directory"])
+        assert_dir(config["save"]["root"])
     except FileNotFoundError as e:
         print(e)
         exit(1)
 
-    config["dataset"]["file"]["train"].extend(sorted(listdir(config["dataset"]["directory"]["train"])))
-    config["dataset"]["file"]["valid"].extend(sorted(listdir(config["dataset"]["directory"]["valid"])))
+    config["dataset"]["train"]["file"] = sorted(listdir(config["dataset"]["train"]["params"]["directory"]))
+    config["dataset"]["valid"]["file"] = sorted(listdir(config["dataset"]["valid"]["params"]["directory"]))
 
-    try:
-        assert_dir(config["save"]["root"])
-    except FileNotFoundError as e:
-        raise e
+    config["general"]["name"] = get_savedir(config["save"]["root"], config["general"])
 
-    try:
-        assert_file(path.join(config["additional information"]["mask"]["directory"], config["additional information"]["mask"]["file"]))
-    except FileNotFoundError as e:
-        raise e
+    config["save"]["directory"] = path.join(config["save"]["root"], config["general"]["name"])
+    mkdir(config["save"]["directory"])
+    config["save"]["program"]["directory"] = path.join(config["save"]["directory"], "program")
+    mkdir(config["save"]["program"]["directory"])
+    config["save"]["log"]["directory"] = path.join(config["save"]["directory"], "log")
+    mkdir(config["save"]["log"]["directory"])
+    config["save"]["model"]["directory"], config["trainer"]["params"]["out"] = [path.join(config["save"]["directory"], "model")] * 2
+    mkdir(config["save"]["model"]["directory"])
 
-    if experiment_name is None:
-        experiment_name = input("name your experiment: ")
-        config["general"]["name"] = experiment_name
-
-    if config["general"]["name"] == "" or path.exists(path.join(config["save"]["root"], experiment_name)):
-        config["general"]["name"] = config["general"]["name"] + config["general"]["hash"]
-        print("your experiment was renamed to {}".format(config["general"]["name"]))
-
-    try:
-        config["save"]["directory"] = path.join(config["save"]["root"], config["general"]["name"])
-        config["save"]["log"]["directory"] = path.join(config["save"]["directory"], "log")
-        config["save"]["model"]["directory"] = path.join(config["save"]["directory"], "model")
-        mkdir(config["save"]["directory"])
-        mkdir(config["save"]["log"]["directory"])
-        mkdir(config["save"]["model"]["directory"])
-
-    except FileExistsError as e:
-        print("hash collision happened")
-        raise e
-
-    try:
-        copy2(config["model"]["module"] + ".py", path.join(config["save"]["directory"], 'model.py'))
-        copy2(config["dataset"]["module"] + ".py", path.join(config["save"]["directory"], 'dataset.py'))
-    except FileNotFoundError as e:
-        print("While copying model.py and dataset.py, the file not found.")
-        raise e
-
-    try:
-        copy2("train.py", path.join(config["save"]["directory"], "train.py"))
-    except FileNotFoundError:
-        print("While copying train.py, the file not found")
-        print("Continue configuration...")
-
-    with open(path.join(config["save"]["log"]["directory"], config["save"]["log"]["file"]), "w") as f:
-        print(yaml_dump(config), file=f)
+    for root, dirs, files in walk("."):
+        for file in files:
+            body, ext = path.splitext(file)
+            if ext == ".py":
+                src = path.join(root, file)
+                dest = path.join(config["save"]["program"]["directory"], path.join(root, file))
+                try:
+                    makedirs(path.dirname(dest))
+                except FileExistsError:
+                    pass
+                copy2(src, dest)
+    with open(path.join(config["save"]["log"]["directory"], config["save"]["log"]["file"]), "a") as f:
+        print(yaml_dump_log(config), file=f)
 
     return config
 
