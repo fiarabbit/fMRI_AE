@@ -14,7 +14,7 @@ def get_instanceid():
 
 
 def get_volumeids():
-    data_volume_size = 50
+    data_volume_size = 80
     model_volume_size = 100
     ret = {"data": "", "out": ""}
     instance_id = get_instanceid()
@@ -27,7 +27,7 @@ def get_volumeids():
             for v in d["Volumes"]:
                 if re.match("^/dev/[a-z]*da.*$",v["Attachments"][0]["Device"]):
                     continue
-                elif v["Size"] == data_volume_size:
+                elif v["Size"] <= data_volume_size:
                     print("{} was recognized as data volume, because its size was {}".format(v["VolumeId"], data_volume_size))
                     # データの大きさを80として取っているため．
                     # スナップショットでの確認は危険性が高いため行わない
