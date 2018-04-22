@@ -23,14 +23,14 @@ def get_config():
             "train": {
                 "params": {
                     "directory": "/data/train",
-                    "crop": [[9, 81], [11, 99], [0, 80]]
-
+                    "crop": None  # to be automatically configured
                 },
                 "file": None  # to be automatically configured
             },
             "valid": {
                 "params": {
-                    "directory": "/data/valid"
+                    "directory": "/data/valid",
+                    "crop": None # to be automatically configured
                 },
                 "file": None  # to be automatically configured
             }
@@ -64,15 +64,15 @@ def get_config():
         "trainer": {
             "params": {
                 "stop_trigger": [1000, "epoch"],
-                "out": None  # to be automaticaly configured
+                "out": None  # to be automatically configured
             },
             "model_interval": [1, "epoch"],
             "log_interval": [100, "iteration"],
             "eval_interval": [1, "epoch"]
         },
         "batch": {
-            "train": 32,
-            "valid": 32
+            "train": 1,
+            "valid": 1
         },
         "save": {
             "root": "/out",
@@ -90,9 +90,18 @@ def get_config():
         },
         "additional information":
             {
+                "crop": [[9, 81], [11, 99], [0, 80]],
                 "mask": {
-                    "directory": "/data/npy/mask",
-                    "file": "average_optthr.npy",
+                    "directory": "/data/mask",
+                    "file": "average_optthr.nii",
+                    "loader": {
+                        "module": "mask_loader",
+                        "function": "load_mask_nib",
+                        "params": {
+                            "mask_path": None, # to be automatically configured
+                            "crop": None # to be automatically configured
+                        }
+                    }
                 },
                 "ec2": {
                     "instance-id": awsutil.get_instanceid(),
@@ -111,6 +120,9 @@ def get_config():
 
     config["dataset"]["train"]["file"] = sorted(listdir(config["dataset"]["train"]["params"]["directory"]))
     config["dataset"]["valid"]["file"] = sorted(listdir(config["dataset"]["valid"]["params"]["directory"]))
+
+    config["dataset"]["train"]["params"]["crop"] = config["additional information"]["crop"]
+    config["dataset"]["valid"]["params"]["crop"] = config["additional information"]["crop"]
 
     config["general"]["name"] = get_savedir(config["save"]["root"], config["general"])
 
@@ -137,6 +149,8 @@ def get_config():
     with open(path.join(config["save"]["log"]["directory"], config["save"]["log"]["file"]), "a") as f:
         print(yaml_dump_log(config), file=f)
 
+    config["additional information"]["mask"]["loader"]["params"]["mask_path"] = path.join(config["additional information"]["mask"]["directory"], config["additional information"]["mask"]["file"])
+    config["additional information"]["mask"]["loader"]["params"]["crop"] = config["additional information"]["crop"]
     return config
 
 

@@ -8,15 +8,17 @@ import sys
 
 class NibDataset(DatasetMixin):
     frames = 150
+
     def __init__(self, directory: str, crop: list):
         self.directory = directory
         self.files = sorted(listdir(self.directory))
         self.slice = [slice(*crop[i]) for i in range(3)]
         self.descriptors = []
         for i, file in enumerate(self.files):
-            sys.stdout.write('\r\033[K' + "{}/{} loaded".format(i, len(self.files)))
+            sys.stdout.write('\r\033[K' + "{:3d}/{:3d} loaded".format(i+1, len(self.files)))
             sys.stdout.flush()
             self.descriptors.append(nib.load(path.join(directory, file)))
+        print("\nfinish")
 
     def __len__(self):
         return len(self.files) * self.frames
@@ -28,15 +30,17 @@ class NibDataset(DatasetMixin):
 
 class NpyCroppedDataset(DatasetMixin):
     frames = 150
+
     def __init__(self, directory: str, crop):
         self.files = sorted(listdir(directory))
         self.memmaps = []
         self.len = len(self.files)
         for i, filename in enumerate(self.files):
             if i % self.frames == 0:
-                sys.stdout.write('\r\033[K' + "{}/{} loaded".format(i // 150, self.len // 150))
+                sys.stdout.write('\r\033[K' + "{:3d}/{:3d} loaded".format(i+1 // 150, self.len // 150))
                 sys.stdout.flush()
             self.memmaps.append(np.load(path.join(directory, filename), mmap_mode="r"))
+        print("\nfinish")
 
     def __len__(self):
         return self.len

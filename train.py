@@ -1,6 +1,5 @@
 from config import get_config, destroy_config, log_config
 from util import yaml_dump
-from mask_loader import load_mask
 
 import chainer
 from chainer.iterators import SerialIterator as Iterator
@@ -28,7 +27,9 @@ def main():
             exit(1)
     try:
         try:
-            mask = load_mask(path.join(config["additional information"]["mask"]["directory"], config["additional information"]["mask"]["file"]))
+            load_mask_module = import_module(config["additional information"]["mask"]["loader"]["module"])
+            load_mask = getattr(load_mask_module, config["additional information"]["mask"]["loader"]["function"])
+            mask = load_mask(**config["additional information"]["mask"]["loader"]["params"])
         except FileNotFoundError as e:
             raise e
         try:
@@ -80,7 +81,7 @@ def main():
         trainer.extend(LogReport(["epoch", "iteration", "main/loss", "validation/main/loss", "lr", "elapsed_time"], trigger=config["trainer"]["log_interval"]))
         trainer.extend(Evaluator(valid_iterator, model, device=gpu), trigger=config["trainer"]["eval_interval"])
         trainer.extend(PrintReport(["epoch", "iteration", "main/loss", "validation/main/loss", "lr", "elapsed_time"]), trigger=config["trainer"]["log_interval"])
-        trainer.extend(ProgressBar(update_interval=10))
+        trainer.extend(ProgressBar(update_interval=1))
         trainer.run()
         log_config(config, "succeeded")
 
