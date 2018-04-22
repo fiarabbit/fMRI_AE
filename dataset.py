@@ -28,7 +28,7 @@ class NibDataset(DatasetMixin):
 
 class NpyCroppedDataset(DatasetMixin):
     frames = 150
-    def __init__(self, directory: str):
+    def __init__(self, directory: str, crop):
         self.files = sorted(listdir(directory))
         self.memmaps = []
         self.len = len(self.files)

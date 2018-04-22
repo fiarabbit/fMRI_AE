@@ -22,7 +22,9 @@ def get_config():
             "class": "NibDataset",
             "train": {
                 "params": {
-                    "directory": "/data/train"
+                    "directory": "/data/train",
+                    "crop": [[9, 81], [11, 99], [0, 80]]
+
                 },
                 "file": None  # to be automatically configured
             },
