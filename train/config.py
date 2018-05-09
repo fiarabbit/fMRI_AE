@@ -1,14 +1,16 @@
-from util import assert_dir, assert_file, yaml_dump, yaml_dump_log
-from helper.config_helper import get_savedir
-import awsutil
-
+import uuid
 from datetime import datetime
 from os import listdir, path, mkdir, walk, makedirs
 from shutil import copy2, rmtree
-import uuid
+
+from . import awsutil
+
+from .helper.config_helper import get_savedir
+from .util import assert_dir, assert_file, yaml_dump_log
 
 
 def get_config():
+    training_package = "train"
     config = {
         "general":
             {
@@ -18,7 +20,8 @@ def get_config():
             },
         "device": [0],  # 0, if using GPUs
         "dataset": {
-            "module": "dataset",  # == dataset.py
+            "package": training_package,
+            "module": ".dataset",  # == dataset.py
             "class": "NibDataset",
             "train": {
                 "params": {
@@ -36,8 +39,9 @@ def get_config():
             }
         },
         "model": {
-            "module": "model",  # == model.py
-            "class": "ReorgPixelShufflerFCAE_E64D64",
+            "package": training_package,
+            "module": ".model",  # == model.py
+            "class": "PixelShufflerFCAE_E32D32",
             "params": {
                 # "mask" parameter is NOT to be configured in config.py
                 "r": 2,
@@ -46,14 +50,16 @@ def get_config():
             }
         },
         "optimizer": {
-            "module": "chainer.optimizers",
+            "package": "chainer.optimizers",
+            "module": ".adam",
             "class": "Adam",
             "params": {
             },
             "hook":
                 [
                     {
-                        "module": "chainer.optimizer",
+                        "package": "chainer",
+                        "module": ".optimizer",
                         "class": "WeightDecay",
                         "params": {
                             "rate": 0.0001
@@ -68,11 +74,12 @@ def get_config():
             },
             "model_interval": [1, "epoch"],
             "log_interval": [100, "iteration"],
-            "eval_interval": [1, "epoch"]
+            "eval_interval": [1, "epoch"],
+            "snapshot_interval": [10, "epoch"]
         },
         "batch": {
-            "train": 1,
-            "valid": 1
+            "train": 14,
+            "valid": 14
         },
         "save": {
             "root": "/out",
@@ -95,7 +102,8 @@ def get_config():
                     "directory": "/data/mask",
                     "file": "average_optthr.nii",
                     "loader": {
-                        "module": "mask_loader",
+                        "package": training_package,
+                        "module": ".mask_loader",
                         "function": "load_mask_nib",
                         "params": {
                             "mask_path": None, # to be automatically configured

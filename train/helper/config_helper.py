@@ -1,8 +1,9 @@
-from os import path, strerror
-from util import assert_dir
 import uuid
-from shutil import move
 from errno import EEXIST
+from os import path, strerror
+from shutil import move
+
+from train.util import assert_dir
 
 
 def _use_hash(save_root, config_general, candidate):

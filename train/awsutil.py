@@ -3,8 +3,8 @@ from subprocess import run, PIPE, CompletedProcess
 import json
 import re
 
+
 def get_instanceid():
-    ret = ""
     try:
         ret = requests.get(
             "http://169.254.169.254/latest/meta-data/instance-id").text
@@ -25,7 +25,7 @@ def get_volumeids():
         if isinstance(obj, CompletedProcess):
             d = json.loads(obj.stdout.decode("utf-8"))
             for v in d["Volumes"]:
-                if re.match("^/dev/[a-z]*da.*$",v["Attachments"][0]["Device"]):
+                if re.match("^/dev/[a-z]*da.*$", v["Attachments"][0]["Device"]):
                     continue
                 elif v["Size"] <= data_volume_size:
                     print("{} was recognized as data volume, because its size was {}".format(v["VolumeId"], data_volume_size))

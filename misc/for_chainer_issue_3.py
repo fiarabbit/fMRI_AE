@@ -1,18 +1,23 @@
-from chainer import Chain, Variable
+from chainer import Link, Chain, Parameter, Variable
 from chainer import links as L
-from chainer.serializers import save_npz, load_npz
+import numpy as np
+
 
 class CustomChain(Chain):
-    def __init__(self, mask):
+    def __init__(self, some_parameter):
         super().__init__()
-        self.mask = mask
-        self._persistent.add("mask")
-        with self.init_scope():
-            self.bn1 = L.BatchNormalization(64)
+        if isinstance(some_parameter, Link) or isinstance(some_parameter, Parameter):
+            with self.init_scope():
+                self.some_parameter = some_parameter
+        else:
+            self.add_persistent("some_parameter", some_parameter)
 
 
-c1 = CustomChain(1)
-c2 = CustomChain(2)
-save_npz("save", c1)
-load_npz("save", c2)
-print(c2.mask)
+def print_children_params_persistent(c: Chain):
+    print(c._children, c._params, c._persistent)
+
+
+print_children_params_persistent(CustomChain(np.array([1, 2, 3])))
+print_children_params_persistent(CustomChain(Variable(np.array([1, 2, 3]))))
+print_children_params_persistent(CustomChain(L.Bias()))
+print_children_params_persistent(CustomChain(Parameter(np.array([1, 2, 3]))))
