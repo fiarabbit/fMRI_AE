@@ -9,6 +9,8 @@ from .links.ResNet import ResBlock3D
 
 from train.links.Reorg import Reorg
 
+import numpy as np
+
 import pdb
 
 
@@ -33,7 +35,7 @@ class SimplestFCAE(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -86,6 +88,7 @@ class SimplestFCAE(chainer.Chain):
         chainer.report({'loss': loss}, self)
         return loss
 
+
 class SimpleFCAE_E64D64_feature64(chainer.Chain):
     # input size
     # None: (91, 109, 91)
@@ -107,7 +110,7 @@ class SimpleFCAE_E64D64_feature64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -221,7 +224,7 @@ class SimpleFCAE_EVD64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -336,7 +339,7 @@ class SimpleFCAE_EVD64_Small(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -451,7 +454,7 @@ class SimpleFCAE_EVD64_Small_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -581,7 +584,7 @@ class PixelShufflerFCAE_E64D64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -692,7 +695,7 @@ class PixelShufflerFCAE_EVD64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -803,7 +806,7 @@ class ReorgPixelShufflerFCAE_E64D64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -911,7 +914,7 @@ class ReorgPixelShufflerFCAE_EVD64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1020,7 +1023,7 @@ class ReorgPixelShufflerFCAE_EVD64_Small(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1128,7 +1131,7 @@ class ReorgPixelShufflerFCAE_EVD64_Small_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1251,7 +1254,7 @@ class ReorgPixelShufflerFCAE_EVDV_Small_BN_feature128(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1374,7 +1377,7 @@ class SimpleFCAE_E16D16(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1486,7 +1489,7 @@ class SimpleFCAE_E16D16_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1613,7 +1616,7 @@ class PixelShufflerFCAE_E16D16(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1723,7 +1726,7 @@ class PixelShufflerFCAE_E32D32(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1833,7 +1836,7 @@ class PixelShufflerFCAE_E16D16_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -1958,7 +1961,7 @@ class ReorgFCAE_E16D16(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2068,7 +2071,7 @@ class ReorgFCAE_E16D16_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2193,7 +2196,7 @@ class ReorgPixelShufflerFCAE_E16D16(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2301,7 +2304,7 @@ class ReorgPixelShufflerFCAE_E16D16_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2424,7 +2427,7 @@ class ReorgPixelShufflerFCAE_E16D16_feature16_BN(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2547,7 +2550,7 @@ class SimpleFCAE_E8D8(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2659,7 +2662,7 @@ class SimpleFCAE_E32D32(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2771,7 +2774,7 @@ class SimpleFCAE_E64D64(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2883,7 +2886,7 @@ class Linear(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -2959,7 +2962,7 @@ class SimpleFCAE_E16D16_ResBlock(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -3074,7 +3077,7 @@ class SimpleFCAE_E16D16_small(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -3200,7 +3203,7 @@ class SimpleFCAE_E8D8_small(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")
@@ -3309,11 +3312,12 @@ class SimpleFCAE_E8D8_L1(chainer.Chain):
     # None: (91, 109, 91)
     # cubic: (88, 88, 88)
     # extreme: (70, 88, 74)
-    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str, l=0.01):
         assert in_mask in ("mask", "concat", "none")
         assert out_mask in ("mask", "none")
         # in_mask <- ["mask", "concat", "none"]
         # out_mask <- ["mask", "none"]
+        assert(isinstance(mask, np.ndarray))
         super().__init__()
         self.mask = mask
         self._persistent.add("mask")
@@ -3323,10 +3327,12 @@ class SimpleFCAE_E8D8_L1(chainer.Chain):
         self._persistent.add("in_mask")
         self.out_mask = out_mask
         self._persistent.add("out_mask")
+        self.l = np.asarray(l, dtype=float)
+        self._persistent.add("l")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
-            self.loss_const = 1
+            self.loss_const = np.asarray(1, dtype=float)
         self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
@@ -3354,13 +3360,14 @@ class SimpleFCAE_E8D8_L1(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+        self.l = chainer.cuda.to_cpu(self.l)
 
     def to_gpu(self, device=None):
-        pdb.set_trace()
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+        self.l = chainer.cuda.to_gpu(self.l, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -3416,8 +3423,8 @@ class SimpleFCAE_E8D8_L1(chainer.Chain):
 
     def __call__(self, x: chainer.Variable):
         loss, loss_l1 = self.calc(x, x)
-        chainer.report({'loss': loss}, self)
-        return loss + 0.01 * loss_l1
+        chainer.report({'loss': loss, 'loss_l1': loss_l1}, self)
+        return loss + self.l * loss_l1
 
 
 class SimpleFCAE_E4D4_small(chainer.Chain):
@@ -3444,7 +3451,7 @@ class SimpleFCAE_E4D4_small(chainer.Chain):
         self.out_mask = out_mask
         self._persistent.add("out_mask")
         if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.data.sum()
+            self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
         self._persistent.add("loss_const")

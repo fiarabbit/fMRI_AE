@@ -41,19 +41,21 @@ def get_config():
         "model": {
             "package": training_package,
             "module": ".model",  # == model.py
-            "class": "PixelShufflerFCAE_E32D32",
+            "class": "SimpleFCAE_E8D8_L1",
             "params": {
                 # "mask" parameter is NOT to be configured in config.py
                 "r": 2,
                 "in_mask": "mask",
-                "out_mask": "mask"
+                "out_mask": "mask",
+                "l": 0.1
             }
         },
         "optimizer": {
             "package": "chainer.optimizers",
-            "module": ".adam",
-            "class": "Adam",
+            "module": ".momentum_sgd",
+            "class": "MomentumSGD",
             "params": {
+                "lr": 1e-2
             },
             "hook":
                 [
@@ -73,7 +75,7 @@ def get_config():
                 "out": None  # to be automatically configured
             },
             "model_interval": [1, "epoch"],
-            "log_interval": [100, "iteration"],
+            "log_interval": [10, "iteration"],
             "eval_interval": [1, "epoch"],
             "snapshot_interval": [10, "epoch"]
         },
@@ -98,6 +100,7 @@ def get_config():
         "additional information":
             {
                 "crop": [[9, 81], [11, 99], [0, 80]],
+                # "crop": [[5, 85], [7, 103], [0, 80]],
                 "mask": {
                     "directory": "/data/mask",
                     "file": "average_optthr.nii",
@@ -114,6 +117,11 @@ def get_config():
                 "ec2": {
                     "instance-id": awsutil.get_instanceid(),
                     "volume-id": awsutil.get_volumeids()
+                },
+                # "finetune": None
+                "finetune": {
+                    "directory": "/efs/fMRI_AE/SimpleFCAE_E8D8/model",
+                    "file": "model_iter_76200.npz"
                 }
             }
     }

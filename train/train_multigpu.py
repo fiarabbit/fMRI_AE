@@ -5,7 +5,7 @@ import chainer.optimizers
 from chainer.iterators import SerialIterator as Iterator
 from chainer.training import Trainer
 from chainer.training.extensions import snapshot, snapshot_object, LogReport, observe_lr, Evaluator, PrintReport, ProgressBar
-from chainer.training.updater import StandardUpdater as Updater
+from chainer.training.updater import ParallelUpdater as Updater
 from chainer.serializers import load_npz
 
 from train.config import get_config, destroy_config, log_config
@@ -41,17 +41,7 @@ def main():
         model = Model(mask=mask, **config["model"]["params"])
         finetune_config = config["additional information"]["finetune"]
         if finetune_config is not None:
-            load_npz(path.join(finetune_config["directory"], finetune_config["file"]), model, strict=False)
-
-        try:
-            chainer.cuda.get_device_from_id(0).use()
-            gpu = 0
-            print("transferring model to GPU...")
-            model.to_gpu(gpu)
-            print("GPU enabled")
-        except RuntimeError:
-            gpu = -1
-            print("GPU disabled")
+            load_npz(path.join(finetune_config["directory"], finetune_config["file"]), model)
 
         dataset_module = import_module(config["dataset"]["module"], config["dataset"]["package"])
         Dataset = getattr(dataset_module, config["dataset"]["class"])
@@ -73,7 +63,7 @@ def main():
             optimizer.add_hook(hook)
 
 
-        updater = Updater(train_iterator, optimizer, device=gpu)
+        updater = Updater(train_iterator, optimizer, devices=gpu)
 
         trainer = Trainer(updater, **config["trainer"]["params"])
         trainer.extend(snapshot(), trigger=config["trainer"]["snapshot_interval"])

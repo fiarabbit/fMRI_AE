@@ -3,16 +3,14 @@ import chainer.links as L
 import chainer.functions as F
 
 
-class ResBlock3D_Identity_BN(chainer.Chain):
+class ResBlock3D(chainer.Chain):
+    """ResBlock w/ bottleneck and w/o residual convolution
     """
-     assert B_in, C_in, W_in, H_in, D_in == B_out, C_out, W_out, H_out, D_out
-     assert C % 2 ** 3 == 0
-    """
-    def __init__(self, channel):
+    def __init__(self, in_channel, out_channel):
         super().__init__()
-        self.in_channel = channel
-        self.out_channel = channel
-        self.hidden_channel = channel // 2 ** 3
+        self.in_channel = in_channel
+        self.out_channel = out_channel
+        self.hidden_channel = self.out_channel // 4
         with self.init_scope():
             self.bn1 = L.BatchNormalization(self.in_channel)
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
