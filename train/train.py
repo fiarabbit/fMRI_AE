@@ -6,11 +6,13 @@ from chainer.iterators import SerialIterator as Iterator
 from chainer.training import Trainer
 from chainer.training.extensions import snapshot, snapshot_object, LogReport, observe_lr, Evaluator, PrintReport, ProgressBar
 from chainer.training.updater import StandardUpdater as Updater
-from chainer.serializers import load_npz
+from chainer.serializers.npz import NpzDeserializer
 
 from train.config import get_config, destroy_config, log_config
 
 from os import path
+
+import numpy as np
 
 def main():
     config = get_config()
@@ -41,7 +43,9 @@ def main():
         model = Model(mask=mask, **config["model"]["params"])
         finetune_config = config["additional information"]["finetune"]
         if finetune_config is not None:
-            load_npz(path.join(finetune_config["directory"], finetune_config["file"]), model, strict=False)
+            with np.load(path.join(finetune_config["directory"], finetune_config["file"])) as f:
+                deserializer = NpzDeserializer(f, "", False, ["mask", "loss_const"])
+                deserializer.load(model)
 
         try:
             chainer.cuda.get_device_from_id(0).use()

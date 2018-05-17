@@ -41,21 +41,19 @@ def get_config():
         "model": {
             "package": training_package,
             "module": ".model",  # == model.py
-            "class": "SimpleFCAE_E8D8_L1",
+            "class": "SimpleFCAE_E8D8_small",
             "params": {
                 # "mask" parameter is NOT to be configured in config.py
                 "r": 2,
                 "in_mask": "mask",
-                "out_mask": "mask",
-                "l": 0.1
+                "out_mask": "mask"
             }
         },
         "optimizer": {
             "package": "chainer.optimizers",
-            "module": ".momentum_sgd",
-            "class": "MomentumSGD",
+            "module": ".adam",
+            "class": "Adam",
             "params": {
-                "lr": 1e-2
             },
             "hook":
                 [
@@ -99,8 +97,8 @@ def get_config():
         },
         "additional information":
             {
-                "crop": [[9, 81], [11, 99], [0, 80]],
-                # "crop": [[5, 85], [7, 103], [0, 80]],
+                # "crop": [[9, 81], [11, 99], [0, 80]],
+                "crop": [[5, 85], [7, 103], [0, 80]],
                 "mask": {
                     "directory": "/data/mask",
                     "file": "average_optthr.nii",
