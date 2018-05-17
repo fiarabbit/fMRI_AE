@@ -27,18 +27,13 @@ class SimplestFCAE(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
 
     def to_cpu(self):
         super().to_cpu()
@@ -102,18 +97,13 @@ class SimpleFCAE_E64D64_feature64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -216,18 +206,13 @@ class SimpleFCAE_EVD64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -331,18 +316,13 @@ class SimpleFCAE_EVD64_Small(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -446,18 +426,13 @@ class SimpleFCAE_EVD64_Small_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -576,18 +551,13 @@ class PixelShufflerFCAE_E64D64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -687,18 +657,13 @@ class PixelShufflerFCAE_EVD64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -798,18 +763,13 @@ class ReorgPixelShufflerFCAE_E64D64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -906,18 +866,13 @@ class ReorgPixelShufflerFCAE_EVD64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1015,18 +970,13 @@ class ReorgPixelShufflerFCAE_EVD64_Small(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1123,18 +1073,13 @@ class ReorgPixelShufflerFCAE_EVD64_Small_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1246,18 +1191,13 @@ class ReorgPixelShufflerFCAE_EVDV_Small_BN_feature128(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1369,18 +1309,13 @@ class SimpleFCAE_E16D16(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1481,18 +1416,13 @@ class SimpleFCAE_E16D16_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1608,18 +1538,13 @@ class PixelShufflerFCAE_E16D16(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1718,18 +1643,13 @@ class PixelShufflerFCAE_E32D32(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1828,18 +1748,13 @@ class PixelShufflerFCAE_E16D16_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -1953,18 +1868,13 @@ class ReorgFCAE_E16D16(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2063,18 +1973,13 @@ class ReorgFCAE_E16D16_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2188,18 +2093,13 @@ class ReorgPixelShufflerFCAE_E16D16(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2296,18 +2196,13 @@ class ReorgPixelShufflerFCAE_E16D16_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2419,18 +2314,13 @@ class ReorgPixelShufflerFCAE_E16D16_feature16_BN(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2542,18 +2432,13 @@ class SimpleFCAE_E8D8(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2654,18 +2539,13 @@ class SimpleFCAE_E32D32(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2766,18 +2646,13 @@ class SimpleFCAE_E64D64(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2878,18 +2753,13 @@ class Linear(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -2954,18 +2824,13 @@ class SimpleFCAE_E16D16_ResBlock(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             self.bias = L.Bias()
@@ -3075,18 +2940,13 @@ class SimpleFCAE_E16D16_small(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -3200,20 +3060,14 @@ class SimpleFCAE_E8D8_L1(chainer.Chain):
         assert (isinstance(mask, np.ndarray))
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         self.l = np.asarray(l, dtype=float)
-        self._persistent.add("l")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = np.asarray(1, dtype=float)
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -3323,18 +3177,13 @@ class SimpleFCAE_E4D4_small(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -3448,18 +3297,13 @@ class SimpleFCAE_E8D8_ReLU(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
@@ -3561,18 +3405,13 @@ class SimpleFCAE_E8D8_small(chainer.Chain):
         # out_mask <- ["mask", "none"]
         super().__init__()
         self.mask = mask
-        self._persistent.add("mask")
         self._r = r
-        self._persistent.add("_r")
         self.in_mask = in_mask
-        self._persistent.add("in_mask")
         self.out_mask = out_mask
-        self._persistent.add("out_mask")
         if self.out_mask == "mask":
             self.loss_const = self.mask.size / self.mask.sum()
         elif self.out_mask == "none":
             self.loss_const = 1
-        self._persistent.add("loss_const")
         with self.init_scope():
             # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
             if self.in_mask == "concat":
