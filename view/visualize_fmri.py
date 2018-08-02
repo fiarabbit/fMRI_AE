@@ -23,8 +23,11 @@ def main():
 def plot_4d_data(data: np.ndarray, mask: np.ndarray, base: np.ndarray, ts: Sequence[int], zs: Sequence[int])->None:
     assert data.ndim == 4
     fig, axes = plt.subplots(len(zs), len(ts))
+    fig.subplots_adjust(left=0.01, right=1 - 0.01, bottom=0.01, top=1 - 0.01, wspace=0.01, hspace=0.01)
     if not isinstance(axes, np.ndarray):
         axes = np.asarray(axes,)
+    if axes.ndim == 1:
+        axes = axes.reshape((len(zs), len(ts)))
     for z_i, z in enumerate(zs):
         for t_i, t in enumerate(ts):
             ax = axes[z_i, t_i]

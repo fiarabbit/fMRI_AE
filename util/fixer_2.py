@@ -10,16 +10,18 @@ import re
 def rename(root_dir: str):
     directory = path.join(root_dir, "model")
     files = sorted(listdir(directory))
-    regex = re.compile("(?P<stem>^(?P<mode>model|snapshot)_iter_[0-9]]*).npz$")
+    regex = re.compile("^(?P<stem>(model|snapshot)_iter_[0-9]*).npz$")
     for i, file in enumerate(files):
         matchobj = regex.match(file)
         if not matchobj or not path.isfile(path.join(directory, file)):
+            print("skipping {}".format(file))
             continue
         else:
-            mode = matchobj.group("mode")
             stem = matchobj.group("stem")
             if stem in files:
+                print("removing {}".format(stem))
                 remove(path.join(directory, stem))
+            print("renaming {} -> {}".format(file, stem))
             move(path.join(directory, file), path.join(directory, stem))
 
 

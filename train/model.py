@@ -38,12 +38,12 @@ class SimplestFCAE(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -132,12 +132,12 @@ class SimpleFCAE_E64D64_feature64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -241,12 +241,12 @@ class SimpleFCAE_EVD64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -351,12 +351,12 @@ class SimpleFCAE_EVD64_Small(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -476,12 +476,12 @@ class SimpleFCAE_EVD64_Small_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -586,12 +586,12 @@ class PixelShufflerFCAE_E64D64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -692,12 +692,12 @@ class PixelShufflerFCAE_EVD64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -798,12 +798,12 @@ class ReorgPixelShufflerFCAE_E64D64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -902,12 +902,12 @@ class ReorgPixelShufflerFCAE_EVD64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1005,12 +1005,12 @@ class ReorgPixelShufflerFCAE_EVD64_Small(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1123,12 +1123,12 @@ class ReorgPixelShufflerFCAE_EVD64_Small_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1241,12 +1241,12 @@ class ReorgPixelShufflerFCAE_EVDV_Small_BN_feature128(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1342,12 +1342,12 @@ class SimpleFCAE_E16D16(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1464,12 +1464,12 @@ class SimpleFCAE_E16D16_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1572,12 +1572,12 @@ class PixelShufflerFCAE_E16D16(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1677,12 +1677,12 @@ class PixelShufflerFCAE_E32D32(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1797,12 +1797,12 @@ class PixelShufflerFCAE_E16D16_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -1902,12 +1902,12 @@ class ReorgFCAE_E16D16(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2022,12 +2022,12 @@ class ReorgFCAE_E16D16_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2128,12 +2128,12 @@ class ReorgPixelShufflerFCAE_E16D16(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2246,12 +2246,12 @@ class ReorgPixelShufflerFCAE_E16D16_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2364,12 +2364,12 @@ class ReorgPixelShufflerFCAE_E16D16_feature16_BN(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2465,12 +2465,12 @@ class SimpleFCAE_E8D8(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2572,12 +2572,79 @@ class SimpleFCAE_E32D32(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def extract(self, x: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        feature = self.conv_extract(c8)
+        return feature
+
+    def reconstruct(self, x):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        feature = self.conv_extract(c8)
+        b1 = F.relu(self.dcnv1(feature))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        out = F.reshape(self.dcnv8(b7), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+        return out_masked
+
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2679,12 +2746,12 @@ class SimpleFCAE_E64D64(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2725,77 +2792,6 @@ class SimpleFCAE_E64D64(chainer.Chain):
         s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
         b7 = F.relu(self.dcnv7(s6))
         out = F.reshape(self.dcnv8(b7), tuple(original_shape))
-
-        if self.out_mask == "mask":
-            out_masked = F.scale(out, self.mask)
-        else:
-            out_masked = out
-
-        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
-
-        return loss
-
-    def __call__(self, x: chainer.Variable):
-        loss = self.calc(x, x)
-        chainer.report({'loss': loss}, self)
-        return loss
-
-
-class Linear(chainer.Chain):
-    # input size
-    # None: (91, 109, 91)
-    # cubic: (88, 88, 88)
-    # extreme: (70, 88, 74)
-    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
-        assert in_mask in ("mask", "concat", "none")
-        assert out_mask in ("mask", "none")
-        # in_mask <- ["mask", "concat", "none"]
-        # out_mask <- ["mask", "none"]
-        super().__init__()
-        self.mask = mask
-        self._r = r
-        self.in_mask = in_mask
-        self.out_mask = out_mask
-        if self.out_mask == "mask":
-            self.loss_const = self.mask.size / self.mask.sum()
-        elif self.out_mask == "none":
-            self.loss_const = 1
-        with self.init_scope():
-            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
-            if self.in_mask == "concat":
-                self.l1 = L.Linear(2 * (81 - 9) * (99 - 11) * (80 - 0), 1000, nobias=False)
-            else:
-                self.l1 = L.Linear((81 - 9) * (99 - 11) * (80 - 0), 1000, nobias=False)
-            self.l2 = L.Linear(1000, (81 - 9) * (99 - 11) * (80 - 0), nobias=False)
-
-    def to_cpu(self):
-        super().to_cpu()
-        self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
-
-    def to_gpu(self, device=None):
-        super().to_gpu(device)
-        self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
-
-    def calc(self, x: chainer.Variable, target: chainer.Variable):
-        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
-        new_shape = copy(original_shape)
-        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
-
-        if self.in_mask == "concat":
-            x = x.reshape(x, tuple(new_shape))
-            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
-        else:
-            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
-
-        if self.out_mask == "mask":
-            target_masked = F.scale(target, self.mask)
-        else:
-            target_masked = target
-
-        feature = self.l1(x_masked)
-        out = F.reshape(self.l2(F.relu(feature)), tuple(original_shape))
 
         if self.out_mask == "mask":
             out_masked = F.scale(out, self.mask)
@@ -2861,12 +2857,12 @@ class SimpleFCAE_E16D16_ResBlock(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -2977,12 +2973,12 @@ class SimpleFCAE_E16D16_small(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -3214,12 +3210,12 @@ class SimpleFCAE_E4D4_small(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -3330,12 +3326,12 @@ class SimpleFCAE_E8D8_ReLU(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -3458,12 +3454,12 @@ class SimpleFCAE_E8D8_small(chainer.Chain):
     def to_cpu(self):
         super().to_cpu()
         self.mask = chainer.cuda.to_cpu(self.mask)
-        chainer.cuda.to_cpu(self.loss_const)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
 
     def to_gpu(self, device=None):
         super().to_gpu(device)
         self.mask = chainer.cuda.to_gpu(self.mask, device)
-        chainer.cuda.to_gpu(self.loss_const, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
 
     def calc(self, x: chainer.Variable, target: chainer.Variable):
         original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
@@ -3522,5 +3518,686 @@ class SimpleFCAE_E8D8_small(chainer.Chain):
 
     def __call__(self, x: chainer.Variable):
         loss = self.calc(x, x)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+
+class Linear(chainer.Chain):
+    def __init__(self, mask: np.ndarray):
+        super(Linear, self).__init__()
+        assert mask.shape == (72, 88, 80)
+        self.mask = mask
+        with self.init_scope():
+            self.l1 = L.Linear(self.xp.count_nonzero(self.mask), 990)
+            self.l2 = L.Linear(990, self.xp.count_nonzero(self.mask))
+
+    def to_cpu(self):
+        super(Linear, self).to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+
+    def to_gpu(self, device=None):
+        super(Linear, self).to_gpu()
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+
+    def calc(self, x):
+        x_masked = x[[Ellipsis] + list(self.xp.nonzero(self.mask))]
+        l1 = F.relu(self.l1(x_masked))
+        y = self.l2(l1)
+        loss = F.mean_absolute_error(x_masked, y)
+        return loss
+
+    def __call__(self, x: np.ndarray):
+        loss = self.calc(x)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+
+class SimpleFCAE_E16D16_ResBlock_small(chainer.Chain):
+    # input size
+    # None: (91, 109, 91)
+    # cubic: (88, 88, 88)
+    # extreme: (70, 88, 74)
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+        assert in_mask in ("mask", "concat", "none")
+        assert out_mask in ("mask", "none")
+        # in_mask <- ["mask", "concat", "none"]
+        # out_mask <- ["mask", "none"]
+        super().__init__()
+        self.mask = mask
+        self._r = r
+        self.in_mask = in_mask
+        self.out_mask = out_mask
+        if self.out_mask == "mask":
+            self.loss_const = self.mask.size / self.mask.sum()
+        elif self.out_mask == "none":
+            self.loss_const = 1
+        with self.init_scope():
+            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
+            self.bias = L.Bias()
+            if self.in_mask == "concat":
+                self.conv0 = L.ConvolutionND(3, 2, 16, (1, 1, 1), 1, 0, nobias=False)
+            else:
+                self.conv0 = L.ConvolutionND(3, 1, 16, (1, 1, 1), 1, 0, nobias=False)
+            self.conv1 = ResBlock3D(16, 16)
+            self.conv2 = ResBlock3D(16, 16)
+            self.conv3 = ResBlock3D(16, 16)
+            self.conv4 = ResBlock3D(16, 16)
+            self.conv5 = ResBlock3D(16, 16)
+            self.conv6 = ResBlock3D(16, 16)
+            self.conv7 = ResBlock3D(16, 16)
+            self.conv8 = ResBlock3D(16, 16)
+            self.conv9 = ResBlock3D(16, 16)
+            self.conv10 = ResBlock3D(16, 16)
+            self.conv_extract = L.ConvolutionND(3, 16, 1, (1, 1, 1), 1, 0, nobias=True)
+            self.dcnv0 = L.ConvolutionND(3, 1, 16, (1, 1, 1), 1, 0, nobias=True)
+            self.dcnv1 = ResBlock3D(16, 16)
+            self.dcnv2 = ResBlock3D(16, 16)
+            self.dcnv3 = ResBlock3D(16, 16)
+            self.dcnv4 = ResBlock3D(16, 16)
+            self.dcnv5 = ResBlock3D(16, 16)
+            self.dcnv6 = ResBlock3D(16, 16)
+            self.dcnv7 = ResBlock3D(16, 16)
+            self.dcnv8 = ResBlock3D(16, 16)
+            self.dcnv9 = ResBlock3D(16, 16)
+            self.dcnv10 = ResBlock3D(16, 16)
+            self.dcnv_out = L.ConvolutionND(3, 16, 1, (1, 1, 1), 1, 0, nobias=False)
+
+    def to_cpu(self):
+        super().to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+
+    def to_gpu(self, device=None):
+        super().to_gpu(device)
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def calc(self, x: chainer.Variable, target: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        if self.out_mask == "mask":
+            target_masked = F.scale(target, self.mask)
+        else:
+            target_masked = target
+
+        c0 = F.relu(self.conv0(x_masked))
+        c1 = F.relu(self.conv1(c0))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        s4 = F.average_pooling_nd(c8, 2, 2, 0)
+        c9 = F.relu(self.conv9(s4))
+        c10 = F.relu(self.conv10(c9))
+        feature = self.conv_extract(c10)
+        b0 = F.relu(self.dcnv0(feature))
+        b1 = F.relu(self.dcnv1(b0))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        b8 = F.relu(self.dcnv8(b7))
+        s7 = F.unpooling_nd(b8, 2, 2, 0, tuple([x * 2 for x in b8.shape[2:]]), False)
+        b9 = F.relu(self.dcnv9(s7))
+        b10 = F.relu(self.dcnv10(b9))
+        out = F.reshape(self.dcnv_out(b10), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+
+        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
+
+        return loss
+
+    def __call__(self, x: chainer.Variable):
+        loss = self.calc(x, x)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+
+class SimpleFCAE_E8D8_linear(chainer.Chain):
+    # input size
+    # None: (91, 109, 91)
+    # cubic: (88, 88, 88)
+    # extreme: (70, 88, 74)
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+        assert in_mask in ("mask", "concat", "none")
+        assert out_mask in ("mask", "none")
+        # in_mask <- ["mask", "concat", "none"]
+        # out_mask <- ["mask", "none"]
+        super().__init__()
+        self.mask = mask
+        self._r = r
+        self.in_mask = in_mask
+        self.out_mask = out_mask
+        if self.out_mask == "mask":
+            self.loss_const = self.mask.size / self.mask.sum()
+        elif self.out_mask == "none":
+            self.loss_const = 1
+        with self.init_scope():
+            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
+            if self.in_mask == "concat":
+                self.conv1 = L.ConvolutionND(3, 2, 8, (3, 3, 3), 1, 1, nobias=False)
+            else:
+                self.conv1 = L.ConvolutionND(3, 1, 8, (3, 3, 3), 1, 1, nobias=False)
+            self.conv2 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv3 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv4 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv5 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv6 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv7 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv8 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv_extract = L.Linear(9 * 11 * 10 * 8, 9 * 11 * 10)
+            self.dcnv1 = L.ConvolutionND(3, 1, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv2 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv3 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv4 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv5 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv6 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv7 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv8 = L.ConvolutionND(3, 8, 1, (3, 3, 3), 1, 1, nobias=False)
+
+    def to_cpu(self):
+        super().to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+
+    def to_gpu(self, device=None):
+        super().to_gpu(device)
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def calc(self, x: chainer.Variable, target: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        if self.out_mask == "mask":
+            target_masked = F.scale(target, self.mask)
+        else:
+            target_masked = target
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        feature = self.conv_extract(c8)
+        feature = F.reshape(feature, c8.shape)
+        b1 = F.relu(self.dcnv1(feature))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        out = F.reshape(self.dcnv8(b7), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+
+        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
+
+        return loss
+
+    def __call__(self, x: chainer.Variable):
+        loss = self.calc(x, x)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+class SimpleFCAE_E16D16_wo_BottleNeck(chainer.Chain):
+    # input size
+    # None: (91, 109, 91)
+    # cubic: (88, 88, 88)
+    # extreme: (70, 88, 74)
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+        assert in_mask in ("mask", "concat", "none")
+        assert out_mask in ("mask", "none")
+        # in_mask <- ["mask", "concat", "none"]
+        # out_mask <- ["mask", "none"]
+        super().__init__()
+        self.mask = mask
+        self._r = r
+        self.in_mask = in_mask
+        self.out_mask = out_mask
+        if self.out_mask == "mask":
+            self.loss_const = self.mask.size / self.mask.sum()
+        elif self.out_mask == "none":
+            self.loss_const = 1
+        with self.init_scope():
+            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
+            if self.in_mask == "concat":
+                self.conv1 = L.ConvolutionND(3, 2, 16, (3, 3, 3), 1, 1, nobias=False)
+            else:
+                self.conv1 = L.ConvolutionND(3, 1, 16, (3, 3, 3), 1, 1, nobias=False)
+            self.conv2 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv3 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv4 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv5 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv6 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv7 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv8 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv1 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv2 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv3 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv4 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv5 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv6 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv7 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv8 = L.ConvolutionND(3, 16, 1, (3, 3, 3), 1, 1, nobias=False)
+
+    def to_cpu(self):
+        super().to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+
+    def to_gpu(self, device=None):
+        super().to_gpu(device)
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def calc(self, x: chainer.Variable, target: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        if self.out_mask == "mask":
+            target_masked = F.scale(target, self.mask)
+        else:
+            target_masked = target
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        b1 = F.relu(self.dcnv1(c8))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        out = F.reshape(self.dcnv8(b7), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+
+        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
+
+        return loss
+
+    def __call__(self, x: chainer.Variable):
+        loss = self.calc(x, x)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+class SimpleFCAE_E8D8_wo_BottleNeck(chainer.Chain):
+    # input size
+    # None: (91, 109, 91)
+    # cubic: (88, 88, 88)
+    # extreme: (70, 88, 74)
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+        assert in_mask in ("mask", "concat", "none")
+        assert out_mask in ("mask", "none")
+        # in_mask <- ["mask", "concat", "none"]
+        # out_mask <- ["mask", "none"]
+        super().__init__()
+        self.mask = mask
+        self._r = r
+        self.in_mask = in_mask
+        self.out_mask = out_mask
+        if self.out_mask == "mask":
+            self.loss_const = self.mask.size / self.mask.sum()
+        elif self.out_mask == "none":
+            self.loss_const = 1
+        with self.init_scope():
+            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
+            if self.in_mask == "concat":
+                self.conv1 = L.ConvolutionND(3, 2, 8, (3, 3, 3), 1, 1, nobias=False)
+            else:
+                self.conv1 = L.ConvolutionND(3, 1, 8, (3, 3, 3), 1, 1, nobias=False)
+            self.conv2 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv3 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv4 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv5 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv6 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv7 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.conv8 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv1 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv2 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv3 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv4 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv5 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv6 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv7 = L.ConvolutionND(3, 8, 8, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv8 = L.ConvolutionND(3, 8, 1, (3, 3, 3), 1, 1, nobias=False)
+
+    def to_cpu(self):
+        super().to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+
+    def to_gpu(self, device=None):
+        super().to_gpu(device)
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def calc(self, x: chainer.Variable, target: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        if self.out_mask == "mask":
+            target_masked = F.scale(target, self.mask)
+        else:
+            target_masked = target
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        b1 = F.relu(self.dcnv1(c8))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        out = F.reshape(self.dcnv8(b7), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+
+        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
+
+        return loss
+
+    def __call__(self, x: chainer.Variable):
+        loss = self.calc(x, x)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+class SimpleFCAE_E16D16_Denoise(chainer.Chain):
+    # input size
+    # None: (91, 109, 91)
+    # cubic: (88, 88, 88)
+    # extreme: (70, 88, 74)
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+        assert in_mask in ("mask", "concat", "none")
+        assert out_mask in ("mask", "none")
+        # in_mask <- ["mask", "concat", "none"]
+        # out_mask <- ["mask", "none"]
+        super().__init__()
+        self.mask = mask
+        self._r = r
+        self.in_mask = in_mask
+        self.out_mask = out_mask
+        if self.out_mask == "mask":
+            self.loss_const = self.mask.size / self.mask.sum()
+        elif self.out_mask == "none":
+            self.loss_const = 1
+        with self.init_scope():
+            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
+            if self.in_mask == "concat":
+                self.conv1 = L.ConvolutionND(3, 2, 16, (3, 3, 3), 1, 1, nobias=False)
+            else:
+                self.conv1 = L.ConvolutionND(3, 1, 16, (3, 3, 3), 1, 1, nobias=False)
+            self.conv2 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv3 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv4 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv5 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv6 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv7 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv8 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv_extract = L.ConvolutionND(3, 16, 1, (1, 1, 1), 1, 0, nobias=True)
+            self.dcnv1 = L.ConvolutionND(3, 1, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv2 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv3 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv4 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv5 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv6 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv7 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv8 = L.ConvolutionND(3, 16, 1, (3, 3, 3), 1, 1, nobias=False)
+
+    def to_cpu(self):
+        super().to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+
+    def to_gpu(self, device=None):
+        super().to_gpu(device)
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def calc(self, x: chainer.Variable, target: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        if self.out_mask == "mask":
+            target_masked = F.scale(target, self.mask)
+        else:
+            target_masked = target
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        feature = self.conv_extract(c8)
+        b1 = F.relu(self.dcnv1(feature))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        out = F.reshape(self.dcnv8(b7), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+
+        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
+
+        return loss
+
+    def __call__(self, x_noise: chainer.Variable, x_truth: chainer.Variable):
+        loss = self.calc(x_noise, x_truth)
+        chainer.report({'loss': loss}, self)
+        return loss
+
+
+class SimpleFCAE_E16D16_wo_BottleNeck_Denoise(chainer.Chain):
+    # input size
+    # None: (91, 109, 91)
+    # cubic: (88, 88, 88)
+    # extreme: (70, 88, 74)
+    def __init__(self, mask, r: int, in_mask: str, out_mask: str):
+        assert in_mask in ("mask", "concat", "none")
+        assert out_mask in ("mask", "none")
+        # in_mask <- ["mask", "concat", "none"]
+        # out_mask <- ["mask", "none"]
+        super().__init__()
+        self.mask = mask
+        self._r = r
+        self.in_mask = in_mask
+        self.out_mask = out_mask
+        if self.out_mask == "mask":
+            self.loss_const = self.mask.size / self.mask.sum()
+        elif self.out_mask == "none":
+            self.loss_const = 1
+        with self.init_scope():
+            # ConvolutionND(dim, inchannel, outchannel, kernel, stride, padding)
+            if self.in_mask == "concat":
+                self.conv1 = L.ConvolutionND(3, 2, 16, (3, 3, 3), 1, 1, nobias=False)
+            else:
+                self.conv1 = L.ConvolutionND(3, 1, 16, (3, 3, 3), 1, 1, nobias=False)
+            self.conv2 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv3 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv4 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv5 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv6 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv7 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.conv8 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv1 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv2 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv3 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv4 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv5 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv6 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv7 = L.ConvolutionND(3, 16, 16, (3, 3, 3), 1, 1, nobias=True)
+            self.dcnv8 = L.ConvolutionND(3, 16, 1, (3, 3, 3), 1, 1, nobias=False)
+
+    def to_cpu(self):
+        super().to_cpu()
+        self.mask = chainer.cuda.to_cpu(self.mask)
+        self.loss_const = chainer.cuda.to_cpu(self.loss_const)
+
+    def to_gpu(self, device=None):
+        super().to_gpu(device)
+        self.mask = chainer.cuda.to_gpu(self.mask, device)
+        self.loss_const = chainer.cuda.to_gpu(self.loss_const, device)
+
+    def calc(self, x: chainer.Variable, target: chainer.Variable):
+        original_shape = list(x.shape)  # [batch, dim1, dim2, dim3]
+        new_shape = copy(original_shape)
+        new_shape.insert(1, 1)  # [batch, 1, dim1, dim2, dim3]
+
+        if self.in_mask == "concat":
+            x = x.reshape(x, tuple(new_shape))
+            x_masked = F.hstack((F.reshape(x, new_shape), F.broadcast_to(self.mask, x.shape)))
+        else:
+            x_masked = F.reshape(F.scale(x, self.mask), new_shape)
+
+        if self.out_mask == "mask":
+            target_masked = F.scale(target, self.mask)
+        else:
+            target_masked = target
+
+        c1 = F.relu(self.conv1(x_masked))
+        c2 = F.relu(self.conv2(c1))
+        s1 = F.average_pooling_nd(c2, 2, 2, 0)
+        c3 = F.relu(self.conv3(s1))
+        c4 = F.relu(self.conv4(c3))
+        s2 = F.average_pooling_nd(c4, 2, 2, 0)
+        c5 = F.relu(self.conv5(s2))
+        c6 = F.relu(self.conv6(c5))
+        s3 = F.average_pooling_nd(c6, 2, 2, 0)
+        c7 = F.relu(self.conv7(s3))
+        c8 = F.relu(self.conv8(c7))
+        b1 = F.relu(self.dcnv1(c8))
+        b2 = F.relu(self.dcnv2(b1))
+        s4 = F.unpooling_nd(b2, 2, 2, 0, tuple([x * 2 for x in b2.shape[2:]]), False)
+        b3 = F.relu(self.dcnv3(s4))
+        b4 = F.relu(self.dcnv4(b3))
+        s5 = F.unpooling_nd(b4, 2, 2, 0, tuple([x * 2 for x in b4.shape[2:]]), False)
+        b5 = F.relu(self.dcnv5(s5))
+        b6 = F.relu(self.dcnv6(b5))
+        s6 = F.unpooling_nd(b6, 2, 2, 0, tuple([x * 2 for x in b6.shape[2:]]), False)
+        b7 = F.relu(self.dcnv7(s6))
+        out = F.reshape(self.dcnv8(b7), tuple(original_shape))
+
+        if self.out_mask == "mask":
+            out_masked = F.scale(out, self.mask)
+        else:
+            out_masked = out
+
+        loss = F.mean_absolute_error(out_masked, target_masked) * self.loss_const
+
+        return loss
+
+    def __call__(self, x_noise: chainer.Variable, x_truth: chainer.Variable):
+        loss = self.calc(x_noise, x_truth)
         chainer.report({'loss': loss}, self)
         return loss

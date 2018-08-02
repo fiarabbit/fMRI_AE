@@ -1,4 +1,4 @@
-from util.fixer_3 import main
+from train.extract import main
 
 if __name__ == "__main__":
     main()

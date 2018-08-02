@@ -5,7 +5,6 @@ from shutil import copy2, rmtree
 
 from . import awsutil
 
-from .helper.config_helper import get_savedir
 from .util import assert_dir, assert_file, yaml_dump_log
 
 from collections import OrderedDict
@@ -18,46 +17,46 @@ def load_config(config_path):
     return d
 
 
-def get_config(name=None):
+def get_config():
     training_package = "train"
     config = {
         "general":
             {
-                "name": "" if name is None else name,
+                "name": "",
                 "date": datetime.now().strftime("%Y/%m/%d_%H:%M:%S"),
                 "hash": str(uuid.uuid4())[0:8]
             },
-        "device": [0],  # 0, if using GPUs
         "dataset": {
             "package": training_package,
             "module": ".dataset",  # == dataset.py
-            "class": "NibNoiseDataset",
+            "class": "NibDataset",
             "train": {
                 "params": {
-                    "directory": "/data_cobre/train",
-                    "crop": None, # to be automatically configured
-                    "noise": 10
+                    "directory": "/data/train",
+                    "crop": None  # to be automatically configured
                 },
                 "file": None  # to be automatically configured
             },
             "valid": {
                 "params": {
-                    "directory": "/data_cobre/valid",
-                    "crop": None,  # to be automatically configured
-                    "noise": 10
+                    "directory": "/data/valid",
+                    "crop": None  # to be automatically configured
                 },
                 "file": None  # to be automatically configured
             }
         },
         "model": {
             "package": training_package,
-            "module": ".model",  # == model.py
-            "class": "SimpleFCAE_E16D16_wo_BottleNeck_Denoise",
+            "module": ".model_multigpu",  # == model_multigpu.py
+            "class": "StackedResBlockMN",
             "params": {
-                # "mask" parameter is NOT to be configured in config.py
-                "r": 2,
-                "in_mask": "mask",
-                "out_mask": "mask"
+                "feature_dim": 1000,
+                # "encoder_channels": [32, 64, 128, 256, 512, 1024, 2048],
+                "encoder_channels": [32, 32, 64, 64, 128, 128, 256],
+                "encoder_layers": [3, 3, 3, 3, 3, 3, 3],
+                # "decoder_channels": [32, 64, 128, 256, 512, 1024, 2048],
+                "decoder_channels": [32, 32, 64, 64, 128, 128, 256],
+                "decoder_layers": [3, 3, 3, 3, 3, 3, 3]
             }
         },
         "optimizer": {
@@ -89,8 +88,8 @@ def get_config(name=None):
             "snapshot_interval": [1000, "iteration"]
         },
         "batch": {
-            "train": 14,
-            "valid": 14
+            "train": 2,
+            "valid": 2
         },
         "save": {
             "root": "/out",
@@ -111,18 +110,17 @@ def get_config(name=None):
                 # "crop": [[9, 81], [11, 99], [0, 80]],
                 # "crop": [[5, 85], [7, 103], [0, 80]],
                 # "crop": [[10, 80], [11, 99], [3, 77]],
-                # "crop": [[0, 91], [0, 109], [0, 91]],
-                "crop": [[9, 81], [7, 103], [0, 80]],
+                "crop": [[0, 91], [0, 109], [0, 91]],
                 "mask": {
-                    "directory": "/data_berlin/mask",
-                    "file": "binary_mask4grey_BerlinMargulies26subjects.nii",
+                    "directory": "/data/mask",
+                    "file": "average_optthr.nii",
                     "loader": {
                         "package": training_package,
                         "module": ".mask_loader",
                         "function": "load_mask_nib",
                         "params": {
-                            "mask_path": None, # to be automatically configured
-                            "crop": None # to be automatically configured
+                            "mask_path": None,  # to be automatically configured
+                            "crop": None  # to be automatically configured
                         }
                     }
                 },
@@ -146,17 +144,30 @@ def get_config(name=None):
 
     config["dataset"]["train"]["params"]["crop"] = config["additional information"]["crop"]
     config["dataset"]["valid"]["params"]["crop"] = config["additional information"]["crop"]
-    if name is None:
-        config["general"]["name"] = get_savedir(config["save"]["root"], config["general"])
+
+    # TODO: write some code to share experiment name across workers
+    config["general"]["name"] = "karioki"
 
     config["save"]["directory"] = path.join(config["save"]["root"], config["general"]["name"])
-    mkdir(config["save"]["directory"])
+    try:
+        mkdir(config["save"]["directory"])
+    except Exception:
+        pass
     config["save"]["program"]["directory"] = path.join(config["save"]["directory"], "program")
-    mkdir(config["save"]["program"]["directory"])
+    try:
+        mkdir(config["save"]["program"]["directory"])
+    except Exception:
+        pass
     config["save"]["log"]["directory"] = path.join(config["save"]["directory"], "log")
-    mkdir(config["save"]["log"]["directory"])
+    try:
+        mkdir(config["save"]["log"]["directory"])
+    except Exception:
+        pass
     config["save"]["model"]["directory"], config["trainer"]["params"]["out"] = [path.join(config["save"]["directory"], "model")] * 2
-    mkdir(config["save"]["model"]["directory"])
+    try:
+        mkdir(config["save"]["model"]["directory"])
+    except Exception:
+        pass
 
     for root, dirs, files in walk("."):
         for file in files:
